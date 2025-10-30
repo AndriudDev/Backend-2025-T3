@@ -199,7 +199,7 @@ La entrega debe ser un archivo comprimido (.zip) que contenga:
 
 - Identificación: Nombres y apellidos de los integrantes.
 
-- Instrucciones de Despliegue: Pasos claros para configurar y hacer funcionar la aplicación (configuración de la base de datos, dónde poner el código, endpoint base, etc.).
+- Instrucciones de Despliegue: Pasos claros para configurar y hacer funcionar la aplicación (dónde poner el código (XAMPP), endpoint base, etc.).
 
 - Pruebas de Postman/curl: Incluir al menos dos ejemplos de request y response exitosos (código 200) y un ejemplo de request fallido (código 401) mostrando el uso del header Authorization.
 
