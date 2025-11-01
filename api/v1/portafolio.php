@@ -41,8 +41,8 @@ switch ($_method) {
                     "activo" => true
                 ]
             ];
-            if (isset($_GET['serid'])) {
-                $idBuscado = intval($_GET['serid']);
+            if (isset($_GET['ejem'])) {
+                $idBuscado = intval($_GET['ejem']);
                 foreach ($respuesta as $item) {
                     if ($item['id'] === $idBuscado) {
                         http_response_code(200);
@@ -55,7 +55,7 @@ switch ($_method) {
                 echo json_encode(['error' => 'No encontrado']);
                 exit;
             } else {
-                // Si no hay parámetro, devolver 
+                // Si no hay parámetro, devolver 400
                 http_response_code(200);
                 echo json_encode($respuesta);
                 exit;

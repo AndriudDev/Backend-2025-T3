@@ -15,16 +15,19 @@ $_partes = explode('/', $_uri);
 // print_r(count($_partes) - 1);
 
 
-$_parametros = explode('?', $_partes[count($_partes) - 1])[1];
-$_parametroID = explode('id=', $_parametros)[1];
+//$_parametros = explode('?', $_partes[count($_partes) - 1])[1];
+//$_parametroID = explode('id=', $_parametros)[1];
 
+$_parametroID = isset($_GET['id']) ? intval($_GET['id']) : null;
+$serid = isset($_GET['serid']) ? intval($_GET['serid']) : null;
+$ejem = isset($_GET['ejem']) ? intval($_GET['ejem']) : null;
 
 
 // Seguridad de la Authorization
-$_authorization = null;
+$_autorizar = null;
 try {
     if(isset(getallheaders()['Authorization'])){
-        $_authorization = getallheaders()['Authorization'];
+        $_autorizar = getallheaders()['Authorization'];
     }else{
         http_response_code(401);
         echo json_encode(['error' => 'No tiene autorización']);
