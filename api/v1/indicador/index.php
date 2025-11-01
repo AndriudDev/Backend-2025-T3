@@ -30,6 +30,7 @@ switch ($_method) {
                     if ($registro['id'] == $_parametroID){
                         http_response_code(200);
                         echo json_encode($registro);
+                        exit; // Salir del script una vez que se encuentra el registro
                     }
                 }
                 http_response_code(404);

@@ -1,6 +1,10 @@
 <?php
 
-//echo 'Hola Mundo';
+// Configuracion de los Headers
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET");
+header("Content-Type: application/json; charset=UTF-8");
+
 
 $_host = $_SERVER['HTTP_HOST'];
 $_method = $_SERVER['REQUEST_METHOD'];
@@ -14,10 +18,7 @@ $_partes = explode('/', $_uri);
 $_parametros = explode('?', $_partes[count($_partes) - 1])[1];
 $_parametroID = explode('id=', $_parametros)[1];
 
-// Configuracion de los Headers
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET");
-header("Content-Type: application/json; charset=UTF-8");
+
 
 // Seguridad de la Authorization
 $_authorization = null;
