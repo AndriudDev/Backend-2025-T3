@@ -1,4 +1,4 @@
-<?
+<?php
 class Conexion
 {
     private $connection;
@@ -42,5 +42,3 @@ class Conexion
         }
     }
 }
-
-// CREATE DATABASE 'coningen_ipss_25t3';

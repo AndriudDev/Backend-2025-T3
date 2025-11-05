@@ -16,7 +16,7 @@ $_parametroID = explode('id=', $_parametros)[1];
 
 // Configuracion de los Headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: GET, POST");
 header("Content-Type: application/json; charset=UTF-8");
 
 // Seguridad de la Authorization

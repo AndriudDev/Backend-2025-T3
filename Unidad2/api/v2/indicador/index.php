@@ -5,24 +5,30 @@ include_once '../version.php';
 switch ($_method) {
     case 'GET':
         if ($_authorization === 'Bearer ipss.2025') {
-            $data = [
-                [
-                    'id' => 1,
-                    'codigo' => 'UF',
-                    'nombre' => 'Unidad de Fomento',
-                    'unidad_medida' => 'Pesos',
-                    'valor' => 39551.81,
-                    'activo' => true
-                ],
-                [
-                    'id' => 2,
-                    'codigo' => 'IVP',
-                    'nombre' => 'Indice de Valor Promedio',
-                    'unidad_medida' => 'Pesos',
-                    'valor' => 41125.14,
-                    'activo' => true
-                ],
-            ];
+            // $data = [
+            //     [
+            //         'id' => 1,
+            //         'codigo' => 'UF',
+            //         'nombre' => 'Unidad de Fomento',
+            //         'unidad_medida' => 'Pesos',
+            //         'valor' => 39551.81,
+            //         'activo' => true
+            //     ],
+            //     [
+            //         'id' => 2,
+            //         'codigo' => 'IVP',
+            //         'nombre' => 'Indice de Valor Promedio',
+            //         'unidad_medida' => 'Pesos',
+            //         'valor' => 41125.14,
+            //         'activo' => true
+            //     ],
+            // ];
+
+            include_once '../conexion.php';
+            include_once 'modelo.php';
+
+            $modelo = new Indicador();
+            $data = $modelo->getAll();
 
             //echo $_parametroID;
             if (isset($_parametroID)) {
@@ -43,6 +49,36 @@ switch ($_method) {
                 die();
             }
         } else {
+            http_response_code(403);
+            echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
+            die();
+        }
+        break;
+    case 'POST':
+        if ($_authorization === 'Bearer ipss.2025'){
+            include_once '../conexion.php';
+            include_once 'modelo.php';
+
+            $modelo = new Indicador();
+
+            $body = json_decode(file_get_contents("php://input", true));
+
+            $modelo->setCodigo($body->codigo);
+            $modelo->setNombre($body->nombre);
+            $modelo->setUnidadMedidaId($body->unidad_medida->id);
+            $modelo->setValor($body->valor);
+
+            $respuesta = $modelo->add($modelo);
+
+            if ($respuesta){
+                http_response_code(201);
+                echo json_encode(['mensaje' => 'Creado Exitosamente']);
+                die();
+            }
+            http_response_code(409);
+            echo json_encode(['error' => 'No se logró crear el registro']);
+            die();
+        }else{
             http_response_code(403);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
             die();
