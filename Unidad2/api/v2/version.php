@@ -13,6 +13,7 @@ $_partes = explode('/', $_uri);
 
 $_parametros = explode('?', $_partes[count($_partes) - 1])[1];
 $_parametroID = explode('id=', $_parametros)[1];
+$_bodaId = explode('bodaId=', $_parametros)[1];
 
 // Configuracion de los Headers
 header("Access-Control-Allow-Origin: *");
