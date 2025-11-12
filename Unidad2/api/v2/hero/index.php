@@ -39,8 +39,7 @@ switch ($_method) {
                         ]
                     ],
                     'activo' => true
-                ],
-                
+                ]
             ];
 
             //echo $_parametroID;

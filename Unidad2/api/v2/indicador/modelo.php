@@ -133,6 +133,7 @@ class Indicador
                 return true;
             }
         } catch (\Throwable $th) {
+            echo 'Error al agregar: ' + $th;
             return false;
         }
     }
