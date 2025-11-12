@@ -11,13 +11,13 @@ $_partes = explode('/', $_uri);
 // print_r(count($_partes) - 1);
 
 
-$_parametros = explode('?', $_partes[count($_partes) - 1])[1];
-$_parametroID = explode('id=', $_parametros)[1];
-$_bodaId = explode('bodaId=', $_parametros)[1];
+$_parametros = '?' . explode('?', $_partes[count($_partes) - 1])[1];
+$_parametroID = explode('?id=', $_parametros)[1];
+$_bodaId = explode('?bodaId=', $_parametros)[1];
 
 // Configuracion de los Headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH, PUT");
 header("Content-Type: application/json; charset=UTF-8");
 
 // Seguridad de la Authorization
