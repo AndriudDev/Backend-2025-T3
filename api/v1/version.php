@@ -1,9 +1,5 @@
 <?php
 
-// Configuracion de los Headers
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET");
-header("Content-Type: application/json; charset=UTF-8");
 
 
 $_host = $_SERVER['HTTP_HOST'];
@@ -18,10 +14,29 @@ $_partes = explode('/', $_uri);
 //$_parametros = explode('?', $_partes[count($_partes) - 1])[1];
 //$_parametroID = explode('id=', $_parametros)[1];
 
-$_parametroID = isset($_GET['id']) ? intval($_GET['id']) : null;
-$serid = isset($_GET['serid']) ? intval($_GET['serid']) : null;
-$ejem = isset($_GET['ejem']) ? intval($_GET['ejem']) : null;
+//$_parametroID = isset($_GET['id']) ? intval($_GET['id']) : null;
+//$serid = isset($_GET['serid']) ? intval($_GET['serid']) : null;
+//$hero = isset($_GET['hero']) ? intval($_GET['hero']) : null;
+//$ejem = isset($_GET['ejem']) ? intval($_GET['ejem']) : null;
 
+
+if(isset(explode('?', $_partes[count($_partes) - 1])[1])){
+    $_parametros = '?' . explode('?', $_partes[count($_partes) - 1])[1];
+} else {
+    $_parametros = null;
+}
+
+
+if(isset(explode('?id=', $_parametros)[1])){
+    $_parametroID = explode('?id=', $_parametros)[1];
+} else {
+    $_parametroID = null;
+}
+
+// Configuracion de los Headers
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH, PUT");
+header("Content-Type: application/json; charset=UTF-8");
 
 // Seguridad de la Authorization
 $_autorizar = null;
