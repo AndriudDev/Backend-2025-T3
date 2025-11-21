@@ -5,8 +5,8 @@ CREATE DATABASE creatuwebs;
 
 CREATE TABLE menu(
     id  INT PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR(6) NOT NULL,
-    link VARCHAR(20) NOT NULL UNIQUE,
+    nombre VARCHAR(20) NOT NULL,
+    link VARCHAR(50) NOT NULL UNIQUE,
     activo BOOLEAN NOT NULL DEFAULT FALSE
 ); 
 
@@ -34,82 +34,10 @@ FLUSH PRIVILEGES;
 
 //////////////////////////////////////
 
-CREATE TABLE web (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    tipo ENUM('hero', 'pagina') NOT NULL,
-
-    titulo VARCHAR(200) NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT TRUE,
-
-    -- Botón
-    boton_texto VARCHAR(100),
-    boton_link VARCHAR(300),
-
-    -- SOLO HERO
-    subtitulo VARCHAR(400),
-    imagen VARCHAR(300),
-
-    -- SOLO PAGINA
-    precio VARCHAR(50),
-    texto TEXT
-);
-
-INSERT INTO web (tipo, id, titulo, subtitulo, boton_texto, boton_link, imagen, activo)
-VALUES
-('hero', 1,
- 'Diseño web a medida para tu negocio',
- 'Creamos sitios web atractivos y funcionales que impulsan tu marca y atraen a tus clientes.',
- 'Ver Planes',
- '#servicios',
- 'https://creatuwebs.com/img/hero/img_1.jpg',
- TRUE
-),
-('hero', 2,
- 'Impulsa tu presencia online',
- 'Transforma tu idea en una web moderna, rápida y optimizada para todos los dispositivos.',
- 'Contactanos',
- 'https://creatuwebs.com/contactanos',
- 'https://creatuwebs.com/img/hero/img_2.jpg',
- TRUE
-),
-('hero', 3,
- 'Webs profesionales para tu negocio',
- 'Diseños personalizados que reflejan la esencia de tu marca y generan confianza.',
- 'Ver Ejemplos',
- '#portafolio',
- 'https://creatuwebs.com/img/hero/img_3.jpg',
- TRUE
-);
-
-INSERT INTO web (tipo, id, titulo, precio, boton_texto, boton_link, texto, activo)
-VALUES
-('pagina', 1,
- 'Página Web Básica',
- '$59.990',
- 'Seleccionar',
- 'https://creatuwebs.com/contactanos',
- '✅ Diseño personalizado
-  ✅ Hasta 4 páginas
-  ✅ 5 Correos Corporativos
-  ✅ Diseño Responsive
-  ...',
- TRUE
-),
-('pagina', 2,
- 'Página Web Autoadministrable',
- '$109.990',
- 'Seleccionar',
- 'https://creatuwebs.com/contactanos',
- '✅ Diseño personalizado
-  ✅ Hasta 10 páginas
-  ...',
- TRUE
-);
 
 
 
-
-//! portafolio
+//! hero
 $respuesta = [
                 [
                     "id" => 1,
@@ -202,39 +130,3 @@ $respuesta = [
                 ]
             ];
 
-//! hero
-$respuesta = [
-                [
-                    "id" => 1,
-                    "titulo" => "Diseño web a medida para tu negocio",
-                    "subtitulo" => "Creamos sitios web atractivos y funcionales que impulsan tu marca y atraen a tus clientes.",
-                    "Boton" => [
-                        "texto" => "Ver Planes",
-                        "link" => "#servicios"
-                    ],
-                    "imagen" => "https://creatuwebs.com/img/hero/img_1.jpg",
-                    "activo" => true
-                ],
-                [
-                    "id" => 2,
-                    "titulo" => "Impulsa tu presencia online",
-                    "subtitulo" => "Transforma tu idea en una web moderna, rápida y optimizada para todos los dispositivos.",
-                    "Boton" => [
-                        "texto" => "Contactanos",
-                        "link" => "https://creatuwebs.com/contactanos"
-                    ],
-                    "imagen" => "https://creatuwebs.com/img/hero/img_2.jpg",
-                    "activo" => true
-                ],
-                [
-                    "id" => 3,
-                    "titulo" => "Webs profesionales para tu negocio",
-                    "subtitulo" => "Diseños personalizados que reflejan la esencia de tu marca y generan confianza.",
-                    "Boton" => [
-                        "texto" => "Ver Ejemplos",
-                        "link" => "#portafolio"
-                    ],
-                    "imagen" => "https://creatuwebs.com/img/hero/img_3.jpg",
-                    "activo" => true
-                ]
-            ];
