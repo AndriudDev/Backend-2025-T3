@@ -93,15 +93,19 @@ class Indicador
         $lista = [];
         $con = new Conexion();
         //$query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id);";
-        $query = $query = "SELECT * FROM menu";
+        $query = $query = "SELECT * FROM webs";
         $rs = mysqli_query($con->getConnection(), $query);
         if ($rs) {
             while ($registro = mysqli_fetch_assoc($rs)) {
                 $registro['activo'] = $registro['activo'] == 1 ? true : false;
                 $objeto = [
                     "id" => $registro['id'],
-                    "nombre" => $registro['nombre'],
-                    "link" => $registro['link'],
+                    "idioma" => $registro['idioma'],
+                    "nombreweb" => $registro['nombreweb'],
+                    "descripcionweb" => $registro['descripcionweb'],
+                    "logo" => $registro['logo'],
+                    "color" => $registro['color'],
+                    "font" => $registro['font'],
                     //"id" => $registro['id'],
                     "activo" => $registro['activo']
                 ];
