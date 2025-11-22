@@ -44,7 +44,7 @@ switch ($_method) {
                 echo json_encode($data);
             }
         } else {
-            http_response_code(401);
+            http_response_code(403);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
         }
         break;

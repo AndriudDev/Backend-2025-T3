@@ -1,29 +1,64 @@
 <?php
 /*
-CREATE TABLE unidad_medida(
-    id  INT PRIMARY KEY AUTO_INCREMENT,
-    simbolo VARCHAR(5) NOT NULL,
-    codigo VARCHAR(5) NOT NULL UNIQUE,
-    nombre_singular VARCHAR(50) NOT NULL,
-    nombre_plural VARCHAR(50) NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT FALSE
+CREATE TABLE servicio (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    precio INT NOT NULL,
+    descripcion VARCHAR(300),
+    color_tema VARCHAR(20),
+    detalles JSON,              -- aquí van las características del plan
+    activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-CREATE TABLE indicador(
-    id  INT PRIMARY KEY AUTO_INCREMENT,
-    codigo VARCHAR(10) NOT NULL UNIQUE,
-    nombre VARCHAR(50) NOT NULL UNIQUE,
-    unidad_medida_id INT NOT NULL,
-    valor DECIMAL(7,2) NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT fk_indicador_unidad_medida FOREIGN KEY (unidad_medida_id) REFERENCES unidad_medida (id)
+INSERT INTO servicio 
+(nombre, precio, descripcion, color_tema, detalles, activo)
+VALUES
+(
+    'Página Web Básica',
+    59990,
+    'Ideal para emprendedores o negocios pequeños.',
+    'secondary',
+    '[
+        "Diseño personalizado",
+        "Hasta 4 páginas",
+        "5 Correos Corporativos",
+        "Diseño Responsive",
+        "Alta en Buscadores",
+        "Dominio y hosting (1 año)",
+        "Botón Redes Sociales",
+        "Certificado SSL",
+        "Soporte básico",
+        "Botón Contacto Whatsapp",
+        "Mapa Ubicación Google Maps",
+        "Capacitación"
+    ]',
+    TRUE
+),
+(
+    'Página Web Autoadministrable',
+    109990,
+    'Incluye panel para editar contenidos sin conocimientos técnicos.',
+    'primary',
+    '[
+        "Diseño personalizado",
+        "Hasta 10 páginas",
+        "10 Correos Corporativos",
+        "Diseño Responsive",
+        "Alta en Buscadores",
+        "Dominio y hosting (1 año)",
+        "Botón Redes Sociales",
+        "Certificado SSL",
+        "Soporte básico",
+        "Botón Contacto Whatsapp",
+        "Mapa Ubicación Google Maps",
+        "Posicionamiento Google (SEO)",
+        "Sitio Autoadministrable",
+        "Formulario de Contacto",
+        "Crear Textos e imágenes",
+        "Capacitación"
+    ]',
+    TRUE
 );
-
-INSERT INTO unidad_medida (simbolo, codigo, nombre_singular, nombre_plural, activo)
-VALUES ('$', 'CLP', 'Peso Chileno', 'Pesos Chilenos', TRUE);
-
-INSERT INTO indicador (codigo, nombre, unidad_medida_id, valor, activo)
-VALUES ('UF', 'Unidad de Fomento', 1, 39551.80, TRUE);
 */
 class Indicador
 {
@@ -93,19 +128,19 @@ class Indicador
         $lista = [];
         $con = new Conexion();
         //$query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id);";
-        $query = $query = "SELECT * FROM webs";
+        $query = $query = "SELECT * FROM servicio";
         $rs = mysqli_query($con->getConnection(), $query);
         if ($rs) {
             while ($registro = mysqli_fetch_assoc($rs)) {
                 $registro['activo'] = $registro['activo'] == 1 ? true : false;
                 $objeto = [
                     "id" => $registro['id'],
-                    "idioma" => $registro['idioma'],
-                    "nombreweb" => $registro['nombreweb'],
-                    "descripcionweb" => $registro['descripcionweb'],
-                    "logo" => $registro['logo'],
-                    "color" => $registro['color'],
-                    "font" => $registro['font'],
+                    "nombre" => $registro['nombre'],
+                    "precio" => $registro['precio'],
+                    "descripcion" => $registro['descripcion'],
+                    "color_tema" => $registro['color_tema'],
+                    "detalles" => json_decode($registro['detalles']),
+                    //"font" => $registro['font'],
                     //"id" => $registro['id'],
                     "activo" => $registro['activo']
                 ];

@@ -1,29 +1,46 @@
 <?php
 /*
-CREATE TABLE unidad_medida(
-    id  INT PRIMARY KEY AUTO_INCREMENT,
-    simbolo VARCHAR(5) NOT NULL,
-    codigo VARCHAR(5) NOT NULL UNIQUE,
-    nombre_singular VARCHAR(50) NOT NULL,
-    nombre_plural VARCHAR(50) NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT FALSE
+CREATE TABLE hero (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(200) NOT NULL,
+    subtitulo VARCHAR(500),
+    texto_boton VARCHAR(50),
+    link_boton VARCHAR(200),
+    imagen VARCHAR(200),
+    orden INT NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-CREATE TABLE indicador(
-    id  INT PRIMARY KEY AUTO_INCREMENT,
-    codigo VARCHAR(10) NOT NULL UNIQUE,
-    nombre VARCHAR(50) NOT NULL UNIQUE,
-    unidad_medida_id INT NOT NULL,
-    valor DECIMAL(7,2) NOT NULL,
-    activo BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT fk_indicador_unidad_medida FOREIGN KEY (unidad_medida_id) REFERENCES unidad_medida (id)
+INSERT INTO hero 
+(titulo, subtitulo, texto_boton, link_boton, imagen, orden, activo)
+VALUES
+(
+    'Diseño web a medida para tu negocio',
+    'Creamos sitios web atractivos y funcionales que impulsan tu marca y atraen a tus clientes.',
+    'Ver Planes',
+    '#servicios',
+    'assets/carru_1.png',
+    1,
+    TRUE
+),
+(
+    'Impulsa tu presencia online',
+    'Transforma tu idea en una web moderna, rápida y optimizada para todos los dispositivos.',
+    'Contáctanos',
+    '#contactanos',
+    'assets/carru_2.png',
+    2,
+    TRUE
+),
+(
+    'Webs profesionales para tu negocio',
+    'Diseños personalizados que reflejan la esencia de tu marca y generan confianza.',
+    'Ver Ejemplos',
+    '#portafolio',
+    'assets/carru_3.png',
+    3,
+    TRUE
 );
-
-INSERT INTO unidad_medida (simbolo, codigo, nombre_singular, nombre_plural, activo)
-VALUES ('$', 'CLP', 'Peso Chileno', 'Pesos Chilenos', TRUE);
-
-INSERT INTO indicador (codigo, nombre, unidad_medida_id, valor, activo)
-VALUES ('UF', 'Unidad de Fomento', 1, 39551.80, TRUE);
 */
 class Indicador
 {
@@ -93,19 +110,19 @@ class Indicador
         $lista = [];
         $con = new Conexion();
         //$query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id);";
-        $query = $query = "SELECT * FROM webs";
+        $query = $query = "SELECT * FROM hero";
         $rs = mysqli_query($con->getConnection(), $query);
         if ($rs) {
             while ($registro = mysqli_fetch_assoc($rs)) {
                 $registro['activo'] = $registro['activo'] == 1 ? true : false;
                 $objeto = [
                     "id" => $registro['id'],
-                    "idioma" => $registro['idioma'],
-                    "nombreweb" => $registro['nombreweb'],
-                    "descripcionweb" => $registro['descripcionweb'],
-                    "logo" => $registro['logo'],
-                    "color" => $registro['color'],
-                    "font" => $registro['font'],
+                    "titulo" => $registro['titulo'],
+                    "subtitulo" => $registro['subtitulo'],
+                    "texto_boton" => $registro['texto_boton'],
+                    "link_boton" => $registro['link_boton'],
+                    "imagen" => $registro['imagen'],
+                    "orden" => $registro['orden'],
                     //"id" => $registro['id'],
                     "activo" => $registro['activo']
                 ];

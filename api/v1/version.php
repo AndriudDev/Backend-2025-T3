@@ -1,12 +1,15 @@
 <?php
-
+// Configuracion de los Headers
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH, PUT");
+header("Content-Type: application/json; charset=UTF-8");
 
 
 $_host = $_SERVER['HTTP_HOST'];
 $_method = $_SERVER['REQUEST_METHOD'];
 $_uri = $_SERVER['REQUEST_URI'];
 $_partes = explode('/', $_uri);
-
+//echo '<1ero>' . $_method;
 // print_r($_partes);
 // print_r(count($_partes) - 1);
 
@@ -33,10 +36,7 @@ if(isset(explode('?id=', $_parametros)[1])){
     $_parametroID = null;
 }
 
-// Configuracion de los Headers
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH, PUT");
-header("Content-Type: application/json; charset=UTF-8");
+
 
 // Seguridad de la Authorization
 $_autorizar = null;

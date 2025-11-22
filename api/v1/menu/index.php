@@ -2,6 +2,7 @@
 
 include_once '../version.php';
 
+
 switch ($_method) {
     case 'GET':
         if ($_autorizar === 'Bearer ipss.2025.T3') {
@@ -22,11 +23,7 @@ switch ($_method) {
             include_once '../config/database.php';
             include_once 'modelo.php';
             $modelo = new Indicador();
-
-            //$modelo = new ModeloIndicador($conexion);
             $data = $modelo->getAll();
-            //$modelo->closeConnection();
-
 
             if (isset($_parametroID)) {
                 foreach ($data as $registro) {
@@ -44,7 +41,38 @@ switch ($_method) {
                 echo json_encode($data);
             }
         } else {
-            http_response_code(401);
+            http_response_code(403);
+            echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
+        }
+        break;
+
+    case 'POST':
+        if ($_autorizar === 'Bearer ipss.2025.T3') {
+            include_once '../config/database.php';
+            include_once 'modelo.php';
+            //echo "POST method en desarrollo";
+
+            $modelo = new Indicador();
+            $body = json_decode(file_get_contents("php://input", true));
+            $modelo->setNombre($body->nombre);
+            $modelo->setLink($body->link);
+            $modelo->setOrden($body->orden);
+            $modelo->setActivo($body->activo);
+
+            //echo json_encode($body->nombre);
+            $respuesta = $modelo->add($modelo);
+
+            if ($respuesta) {
+                http_response_code(201);
+                echo json_encode(['mensaje' => 'Creado Exitosamente']);
+                die();
+            }
+            http_response_code(409);
+            echo json_encode(['error' => 'No se logró crear el registro']);
+            die();
+
+        } else {
+            http_response_code(403);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
         }
         break;
