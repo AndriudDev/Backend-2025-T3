@@ -3,20 +3,80 @@
 Identificación: Valeria Castro Comte
                 Andrés Vergara Silva
 
+Instrucciones de Despliegue (Clave): Pasos exactos para levantar el proyecto en XAMPP.
+
 a. "Copiar la carpeta del proyecto dentro de C:\xampp\htdocs\".
 b. "Iniciar los servicios de Apache y MySQL en XAMPP".
-c. "Importar el script creatuwebs.sql en phpMyAdmin (http://localhost/phpmyadmin)".
-d. "La URL base de la API es: http://localhost/ipss/api/v1/".
+c. Crear base de datos llamada "creatuwebs" en phpMyAdmin (http://localhost/phpmyadmin).
+d. importar script creatuwebs.sql en la base de dato creatuwebs.
+e. Crear usuario con el siguiente comando: 
+
+    CREATE USER 'creatuwebs'@'localhost' IDENTIFIED BY 'creatuwebs_b4ck3nd';
+    GRANT ALL PRIVILEGES ON `creatuwebs`. * TO 'creatuwebs'@'localhost';
+    FLUSH PRIVILEGES;
+
+f. Los datos de conección son:
+
+        host = '127.0.0.1'; // localhost
+        port = 3306;
+        db = 'creatuwebs';
+        username = 'creatuwebs';
+        password = 'creatuwebs_b4ck3nd';
+
+g. "La URL base de la API es: http://localhost/ipss/api/v1/"
+
+Colección de Postman:
+
+En la carpeta IPSS esta el json ("ipss.postman_collection") con todas las rutas solicitadas (GET, POST, PUT, PATCH, DELETE) y la autenticación Bearer Token configurada.
+    
+pass : Bearer ipss.2025.T3
 
 
-    Header: Authorization
-    Valor: Bearer ipss.2025.T3
-
-
-Instrucciones de Despliegue (Clave): Pasos exactos para levantar el proyecto en XAMPP. 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Configuracion sin el archivo creatuwebs.sql
 
 CREATE DATABASE creatuwebs; 
 
