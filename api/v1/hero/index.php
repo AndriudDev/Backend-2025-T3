@@ -110,6 +110,122 @@ switch ($_method) {
             die();
         }
         break;
+    case 'PATCH':
+        if ($_autorizar === 'Bearer ipss.2025.T3') {
+            include_once '../config/database.php';
+            include_once 'modelo.php';
+            $modelo = new Indicador();
+
+            if (!isset($_parametroID)) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Falta el ID del registro a Deshabilitar']);
+
+                die();
+            }
+            $modelo->setId($_parametroID);
+
+            $anterior = $modelo->getById($modelo);
+
+            if ($anterior == null) {
+                http_response_code(404);
+                echo json_encode(['error' => 'El ID del registro a Deshabilitar no existe']);
+                die();
+            }
+
+            $modelo->setId($_parametroID);
+
+            $respuesta = $modelo->enable($modelo);
+
+            if ($respuesta) {
+                http_response_code(200);
+                echo json_encode(['mensaje' => 'Encendido Exitosamente']);
+                die();
+            }
+            http_response_code(409);
+            echo json_encode(['error' => 'No se logró encender el registro']);
+            die();
+        } else {
+            http_response_code(403);
+            echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
+            die();
+        }
+        break;
+    case 'PUT':
+        if ($_autorizar === 'Bearer ipss.2025.T3') {
+            include_once '../config/database.php';
+            include_once 'modelo.php';
+            //echo "POST method en desarrollo";
+
+            $modelo = new Indicador();
+
+            if (!isset($_parametroID)) {
+                http_response_code(400);
+                echo json_encode(['error' => 'Falta el ID del registro a Actualizar']);
+
+                die();
+            }
+            $modelo->setId($_parametroID);
+
+            $anterior = $modelo->getById($modelo);
+
+            if ($anterior == null) {
+                http_response_code(404);
+                echo json_encode(['error' => 'El ID del registro a Actualizar no existe']);
+                die();
+            }
+
+
+            $body = json_decode(file_get_contents("php://input", true));
+
+            $modelo->setTitulo($body->titulo);
+            $modelo->setSubtitulo($body->subtitulo);
+            $modelo->setTextoboton($body->texto_boton);
+            $modelo->setLinkboton($body->link_boton);
+            $modelo->setImagen($body->imagen);
+            $modelo->setOrden($body->orden);
+
+
+            $cantidadCambios = 0;
+
+            if (strcmp($anterior['titulo'], $modelo->getTitulo())) {
+                $cantidadCambios++;
+            }
+            if ($anterior['subtitulo'] != $modelo->getSubtitulo()) {
+                $cantidadCambios++;
+            }
+            if ($anterior['texto_boton'] != $modelo->getTextoboton()) {
+                $cantidadCambios++;
+            }
+            if (strcmp($anterior['link_boton'], $modelo->getLinkboton())) {
+                $cantidadCambios++;
+            }
+            if ($anterior['imagen'] != $modelo->getImagen()) {
+                $cantidadCambios++;
+            }
+            if ($anterior['orden'] != $modelo->getOrden()) {
+                $cantidadCambios++;
+            }
+
+            if ($cantidadCambios > 0) {
+                $respuesta = $modelo->update($modelo);
+                if ($respuesta) {
+                    http_response_code(200);
+                    echo json_encode(['mensaje' => 'Actualizado Exitosamente']);
+                    die();
+                }
+                http_response_code(409);
+                echo json_encode(['error' => 'No se Actualizó como querías.']);
+                die();
+            }
+            http_response_code(409);
+            echo json_encode(['error' => 'No se hicieron cambios']);
+            die();
+        } else {
+            http_response_code(403);
+            echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
+            die();
+        }
+        break;
     default:
         http_response_code(501);
         echo json_encode(['error' => 'Método [' . $_method . '] no implementado']);

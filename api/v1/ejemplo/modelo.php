@@ -128,26 +128,22 @@ class Indicador
     {
         $lista = [];
         $con = new Conexion();
-        $query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id) WHERE indi.id=" . $_actual->getId();
+        //$query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id) WHERE indi.id=" . $_actual->getId();
         // echo $query;
+        $query = "SELECT * FROM ejemplos WHERE id=" . $_actual->getId();
+
+
         $rs = mysqli_query($con->getConnection(), $query);
         if ($rs) {
             while ($registro = mysqli_fetch_assoc($rs)) {
                 $registro['activo'] = $registro['activo'] == 1 ? true : false;
                 $objeto = [
-                    "id" => $registro['indi_id'],
-                    "codigo" => $registro['indi_codigo'],
-                    "nombre" => $registro['nombre'],
-                    "valor" => $registro['valor'],
-                    "unidad_medida" => [
-                        "id" => $registro['unidad_medida_id'],
-                        "simbolo" => $registro['simbolo'],
-                        "codigo" => $registro['unme_codigo'],
-                        "nombre" => [
-                            "singular" => $registro['nombre_singular'],
-                            "plural" => $registro['nombre_plural'],
-                        ],
-                    ],
+                    "id" => $registro['id'],
+                    "titulo" => $registro['titulo'],
+                    "imagen" => $registro['imagen'],
+                    "link" => $registro['link'],
+                    "plan" => $registro['plan'],
+                    //"id" => $registro['id'],
                     "activo" => $registro['activo']
                 ];
                 array_push($lista, $objeto);
@@ -155,7 +151,7 @@ class Indicador
             mysqli_free_result($rs);
         }
         $con->closeConnection();
-        return $lista[0];
+        return $lista[0] ?? null;
     }
 
     public function add(Indicador $_nuevo)
@@ -163,7 +159,7 @@ class Indicador
         $con = new Conexion();
         $nuevoId = count($this->getAll()) + 1;
         $query = "INSERT INTO ejemplos (id, titulo, imagen, link, plan, activo) VALUES (" . $nuevoId . " , '" . $_nuevo->getTitulo() . "', '" . $_nuevo->getImagen() . "',  '" . $_nuevo->getLink() . "',  '" . $_nuevo->getPlan() . "', TRUE)";
-        
+
         try {
             $rs = mysqli_query($con->getConnection(), $query);
             $con->closeConnection();
@@ -215,7 +211,9 @@ class Indicador
     public function update(Indicador $_nuevo)
     {
         $con = new Conexion();
-        $query = "UPDATE indicador SET codigo='" . $_nuevo->getCodigo() . "', nombre='" . $_nuevo->getNombre() . "', unidad_medida_id=" . $_nuevo->getUnidadMedidaId() . ", valor=" . $_nuevo->getValor() . " WHERE id=" . $_nuevo->getId();
+        $query = "UPDATE ejemplos SET titulo='" . $_nuevo->getTitulo() . "', imagen='" . $_nuevo->getImagen() . "', link='" . $_nuevo->getLink() . "', plan='" . $_nuevo->getPlan() .  "' WHERE id=" . $_nuevo->getId();
+        
+        //$query = "UPDATE indicador SET codigo='" . $_nuevo->getCodigo() . "', nombre='" . $_nuevo->getNombre() . "', unidad_medida_id=" . $_nuevo->getUnidadMedidaId() . ", valor=" . $_nuevo->getValor() . " WHERE id=" . $_nuevo->getId();
         //echo $query;
         try {
             $rs = mysqli_query($con->getConnection(), $query);

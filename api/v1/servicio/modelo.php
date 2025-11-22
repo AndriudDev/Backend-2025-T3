@@ -111,7 +111,7 @@ class Indicador
     {
         $this->nombre = $_n;
     }
-        public function setPrecio($_n)
+    public function setPrecio($_n)
     {
         $this->precio = $_n;
     }
@@ -165,26 +165,24 @@ class Indicador
     {
         $lista = [];
         $con = new Conexion();
-        $query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id) WHERE indi.id=" . $_actual->getId();
+        //$query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id) WHERE indi.id=" . $_actual->getId();
         // echo $query;
+        $query = "SELECT * FROM servicio WHERE id=" . $_actual->getId();
+
+
         $rs = mysqli_query($con->getConnection(), $query);
         if ($rs) {
             while ($registro = mysqli_fetch_assoc($rs)) {
                 $registro['activo'] = $registro['activo'] == 1 ? true : false;
                 $objeto = [
-                    "id" => $registro['indi_id'],
-                    "codigo" => $registro['indi_codigo'],
+                    "id" => $registro['id'],
                     "nombre" => $registro['nombre'],
-                    "valor" => $registro['valor'],
-                    "unidad_medida" => [
-                        "id" => $registro['unidad_medida_id'],
-                        "simbolo" => $registro['simbolo'],
-                        "codigo" => $registro['unme_codigo'],
-                        "nombre" => [
-                            "singular" => $registro['nombre_singular'],
-                            "plural" => $registro['nombre_plural'],
-                        ],
-                    ],
+                    "precio" => $registro['precio'],
+                    "descripcion" => $registro['descripcion'],
+                    "color_tema" => $registro['color_tema'],
+                    "detalles" => json_decode($registro['detalles']),
+                    //"font" => $registro['font'],
+                    //"id" => $registro['id'],
                     "activo" => $registro['activo']
                 ];
                 array_push($lista, $objeto);
@@ -192,7 +190,7 @@ class Indicador
             mysqli_free_result($rs);
         }
         $con->closeConnection();
-        return $lista[0];
+        return $lista[0] ?? null;
     }
 
     public function add(Indicador $_nuevo)
@@ -234,7 +232,7 @@ class Indicador
     public function enable(Indicador $_actual)
     {
         $con = new Conexion();
-        $query = "UPDATE indicador SET activo = 1 WHERE id = " . $_actual->getId();
+        $query = "UPDATE servicio SET activo = 1 WHERE id = " . $_actual->getId();
         // echo $query;
         try {
             $rs = mysqli_query($con->getConnection(), $query);
@@ -252,7 +250,7 @@ class Indicador
     public function update(Indicador $_nuevo)
     {
         $con = new Conexion();
-        $query = "UPDATE indicador SET codigo='" . $_nuevo->getCodigo() . "', nombre='" . $_nuevo->getNombre() . "', unidad_medida_id=" . $_nuevo->getUnidadMedidaId() . ", valor=" . $_nuevo->getValor() . " WHERE id=" . $_nuevo->getId();
+        $query = "UPDATE servicio SET nombre='" . $_nuevo->getNombre() . "', precio=" . $_nuevo->getPrecio() . ", descripcion='" . $_nuevo->getDescripcion() ."', color_tema='" . $_nuevo->getColortema() ."', detalles='" . $_nuevo->getDetalles() . "' WHERE id=" . $_nuevo->getId();        
         //echo $query;
         try {
             $rs = mysqli_query($con->getConnection(), $query);
