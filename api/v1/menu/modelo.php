@@ -143,6 +143,7 @@ class Indicador
         $con = new Conexion();
         $nuevoId = count($this->getAll()) + 1;
         $query = "INSERT INTO menu (id, nombre, link, orden, activo) VALUES (" . $nuevoId . " , '" . $_nuevo->getNombre() . "', '" . $_nuevo->getLink() . "',  " . $_nuevo->getOrden() . ", TRUE)";
+
         try {
             $rs = mysqli_query($con->getConnection(), $query);
             $con->closeConnection();

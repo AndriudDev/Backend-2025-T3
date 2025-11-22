@@ -37,10 +37,10 @@ VALUES
 class Indicador
 {
     private $id;
-    private $codigo;
-    private $nombre;
-    private $unidad_medida_id;
-    private $valor;
+    private $titulo;
+    private $imagen;
+    private $link;
+    private $plan;
     private $activo;
 
     public function __construct() {}
@@ -50,21 +50,21 @@ class Indicador
     {
         return $this->id;
     }
-    public function getCodigo()
+    public function getTitulo()
     {
-        return $this->codigo;
+        return $this->titulo;
     }
-    public function getNombre()
+    public function getImagen()
     {
-        return $this->nombre;
+        return $this->imagen;
     }
-    public function getUnidadMedidaId()
+    public function getLink()
     {
-        return $this->unidad_medida_id;
+        return $this->link;
     }
-    public function getValor()
+    public function getPlan()
     {
-        return $this->valor;
+        return $this->plan;
     }
     public function getActivo()
     {
@@ -76,21 +76,21 @@ class Indicador
     {
         $this->id = $_n;
     }
-    public function setCodigo($_n)
+    public function setTitulo($_n)
     {
-        $this->codigo = $_n;
+        $this->titulo = $_n;
     }
-    public function setNombre($_n)
+    public function setImagen($_n)
     {
-        $this->nombre = $_n;
+        $this->imagen = $_n;
     }
-    public function setUnidadMedidaId($_n)
+    public function setLink($_n)
     {
-        $this->unidad_medida_id = $_n;
+        $this->link = $_n;
     }
-    public function setValor($_n)
+    public function setPlan($_n)
     {
-        $this->valor = $_n;
+        $this->plan = $_n;
     }
     public function setActivo($_n)
     {
@@ -162,7 +162,8 @@ class Indicador
     {
         $con = new Conexion();
         $nuevoId = count($this->getAll()) + 1;
-        $query = "INSERT INTO indicador (id, codigo, nombre, unidad_medida_id, valor, activo) VALUES (" . $nuevoId . " ,'" . $_nuevo->getCodigo() . "', '" . $_nuevo->getNombre() . "', " . $_nuevo->getUnidadMedidaId() . ", " . $_nuevo->getValor() . ", TRUE)";
+        $query = "INSERT INTO ejemplos (id, titulo, imagen, link, plan, activo) VALUES (" . $nuevoId . " , '" . $_nuevo->getTitulo() . "', '" . $_nuevo->getImagen() . "',  '" . $_nuevo->getLink() . "',  '" . $_nuevo->getPlan() . "', TRUE)";
+        
         try {
             $rs = mysqli_query($con->getConnection(), $query);
             $con->closeConnection();

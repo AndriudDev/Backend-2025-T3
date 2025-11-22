@@ -45,10 +45,12 @@ VALUES
 class Indicador
 {
     private $id;
-    private $codigo;
-    private $nombre;
-    private $unidad_medida_id;
-    private $valor;
+    private $titulo;
+    private $subtitulo;
+    private $texto_boton;
+    private $link_boton;
+    private $imagen;
+    private $orden;
     private $activo;
 
     public function __construct() {}
@@ -58,21 +60,29 @@ class Indicador
     {
         return $this->id;
     }
-    public function getCodigo()
+    public function getTitulo()
     {
-        return $this->codigo;
+        return $this->titulo;
     }
-    public function getNombre()
+    public function getSubtitulo()
     {
-        return $this->nombre;
+        return $this->subtitulo;
     }
-    public function getUnidadMedidaId()
+    public function getTextoboton()
     {
-        return $this->unidad_medida_id;
+        return $this->texto_boton;
     }
-    public function getValor()
+    public function getLinkboton()
     {
-        return $this->valor;
+        return $this->link_boton;
+    }
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+    public function getOrden()
+    {
+        return $this->orden;
     }
     public function getActivo()
     {
@@ -84,21 +94,29 @@ class Indicador
     {
         $this->id = $_n;
     }
-    public function setCodigo($_n)
+    public function setTitulo($_n)
     {
-        $this->codigo = $_n;
+        $this->titulo = $_n;
     }
-    public function setNombre($_n)
+    public function setSubtitulo($_n)
     {
-        $this->nombre = $_n;
+        $this->subtitulo = $_n;
     }
-    public function setUnidadMedidaId($_n)
+    public function setTextoboton($_n)
     {
-        $this->unidad_medida_id = $_n;
+        $this->texto_boton = $_n;
     }
-    public function setValor($_n)
+    public function setLinkboton($_n)
     {
-        $this->valor = $_n;
+        $this->link_boton = $_n;
+    }
+    public function setImagen($_n)
+    {
+        $this->imagen = $_n;
+    }
+    public function setOrden($_n)
+    {
+        $this->orden = $_n;
     }
     public function setActivo($_n)
     {
@@ -172,7 +190,8 @@ class Indicador
     {
         $con = new Conexion();
         $nuevoId = count($this->getAll()) + 1;
-        $query = "INSERT INTO indicador (id, codigo, nombre, unidad_medida_id, valor, activo) VALUES (" . $nuevoId . " ,'" . $_nuevo->getCodigo() . "', '" . $_nuevo->getNombre() . "', " . $_nuevo->getUnidadMedidaId() . ", " . $_nuevo->getValor() . ", TRUE)";
+        $query = "INSERT INTO hero (id, titulo, subtitulo, texto_boton, link_boton, imagen, orden, activo) VALUES (" . $nuevoId . " , '" . $_nuevo->getTitulo() . "', '" . $_nuevo->getSubtitulo() . "',  '" . $_nuevo->getTextoboton() . "',  '" . $_nuevo->getLinkboton() . "', '" . $_nuevo->getImagen() . "','" . $_nuevo->getOrden() . "', TRUE)";
+        
         try {
             $rs = mysqli_query($con->getConnection(), $query);
             $con->closeConnection();
