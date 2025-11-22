@@ -10,15 +10,7 @@ class Conexion
     private $server;
 
     public function __construct()
-    /* {
-        $this->server = $_SERVER['SERVER_NAME'];
-        $this->connection = null;
-        $this->host = '127.0.0.1'; // localhost
-        $this->port = 3306;
-        $this->db = 'coningen_ipss_back_25t3';
-        $this->username = 'coningen_ipss_back_25t3';
-        $this->password = '1pss_b4ck3nd';
-    } */
+
     {
         $this->server = $_SERVER['SERVER_NAME'];
         $this->connection = null;

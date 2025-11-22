@@ -1,4 +1,21 @@
-# Backend-2025-T3
+# Backend-2025-T3 - Sebastián Cabezas
+
+Identificación: Valeria Castro Comte
+                Andrés Vergara Silva
+
+a. "Copiar la carpeta del proyecto dentro de C:\xampp\htdocs\".
+b. "Iniciar los servicios de Apache y MySQL en XAMPP".
+c. "Importar el script creatuwebs.sql en phpMyAdmin (http://localhost/phpmyadmin)".
+d. "La URL base de la API es: http://localhost/ipss/api/v1/".
+
+
+    Header: Authorization
+    Valor: Bearer ipss.2025.T3
+
+
+Instrucciones de Despliegue (Clave): Pasos exactos para levantar el proyecto en XAMPP. 
+
+
 
 
 CREATE DATABASE creatuwebs; 
