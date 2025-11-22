@@ -179,7 +179,7 @@ class Indicador
     public function disable(Indicador $_actual)
     {
         $con = new Conexion();
-        $query = "UPDATE indicador SET activo = 0 WHERE id = " . $_actual->getId();
+        $query = "UPDATE ejemplos SET activo = 0 WHERE id = " . $_actual->getId();
         // echo $query;
         try {
             $rs = mysqli_query($con->getConnection(), $query);
@@ -197,7 +197,7 @@ class Indicador
     public function enable(Indicador $_actual)
     {
         $con = new Conexion();
-        $query = "UPDATE indicador SET activo = 1 WHERE id = " . $_actual->getId();
+        $query = "UPDATE ejemplos SET activo = 1 WHERE id = " . $_actual->getId();
         // echo $query;
         try {
             $rs = mysqli_query($con->getConnection(), $query);

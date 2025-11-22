@@ -70,10 +70,69 @@ switch ($_method) {
             http_response_code(409);
             echo json_encode(['error' => 'No se logró crear el registro']);
             die();
-
         } else {
             http_response_code(403);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
+        }
+        break;
+    case 'DELETE':
+        if ($_autorizar === 'Bearer ipss.2025.T3') {
+            include_once '../config/database.php';
+            include_once 'modelo.php';
+            $modelo = new Indicador();
+
+            if(!isset($_parametroID)){
+                http_response_code(400);
+                echo json_encode(['error' => 'Falta el ID del registro a Deshabilitar']);
+                die();
+            }
+
+            $modelo->setId($_parametroID);
+
+            $respuesta = $modelo->disable($modelo);
+
+            if ($respuesta) {
+                http_response_code(200);
+                echo json_encode(['mensaje' => 'Deshabilitado Exitosamente']);
+                die();
+            }
+            http_response_code(409);
+            echo json_encode(['error' => 'No se logró Deshabilitar el registro']);
+            die();
+        } else {
+            http_response_code(403);
+            echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
+            die();
+        }
+        break;
+    case 'PATCH':
+        if ($_autorizar === 'Bearer ipss.2025.T3') {
+
+            include_once '../conexion.php';
+            include_once 'modelo.php';
+
+            $modelo = new Indicador();
+
+            $body = json_decode(file_get_contents("php://input", true));
+
+            // print_r($body->id);
+
+            $modelo->setId($body->id);
+
+            $respuesta = $modelo->enable($modelo);
+
+            if ($respuesta) {
+                http_response_code(200);
+                echo json_encode(['mensaje' => 'Encendido Exitosamente']);
+                die();
+            }
+            http_response_code(409);
+            echo json_encode(['error' => 'No se logró encender el registro']);
+            die();
+        } else {
+            http_response_code(403);
+            echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
+            die();
         }
         break;
     default:

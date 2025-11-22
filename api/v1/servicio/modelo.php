@@ -63,10 +63,11 @@ VALUES
 class Indicador
 {
     private $id;
-    private $codigo;
     private $nombre;
-    private $unidad_medida_id;
-    private $valor;
+    private $precio;
+    private $descripcion;
+    private $color_tema;
+    private $detalles;
     private $activo;
 
     public function __construct() {}
@@ -76,21 +77,25 @@ class Indicador
     {
         return $this->id;
     }
-    public function getCodigo()
-    {
-        return $this->codigo;
-    }
     public function getNombre()
     {
         return $this->nombre;
     }
-    public function getUnidadMedidaId()
+    public function getPrecio()
     {
-        return $this->unidad_medida_id;
+        return $this->precio;
     }
-    public function getValor()
+    public function getDescripcion()
     {
-        return $this->valor;
+        return $this->descripcion;
+    }
+    public function getColortema()
+    {
+        return $this->color_tema;
+    }
+    public function getDetalles()
+    {
+        return $this->detalles;
     }
     public function getActivo()
     {
@@ -102,21 +107,25 @@ class Indicador
     {
         $this->id = $_n;
     }
-    public function setCodigo($_n)
-    {
-        $this->codigo = $_n;
-    }
     public function setNombre($_n)
     {
         $this->nombre = $_n;
     }
-    public function setUnidadMedidaId($_n)
+        public function setPrecio($_n)
     {
-        $this->unidad_medida_id = $_n;
+        $this->precio = $_n;
     }
-    public function setValor($_n)
+    public function setDescripcion($_n)
     {
-        $this->valor = $_n;
+        $this->descripcion = $_n;
+    }
+    public function setColortema($_n)
+    {
+        $this->color_tema = $_n;
+    }
+    public function setDetalles($_n)
+    {
+        $this->detalles = $_n;
     }
     public function setActivo($_n)
     {
@@ -190,7 +199,8 @@ class Indicador
     {
         $con = new Conexion();
         $nuevoId = count($this->getAll()) + 1;
-        $query = "INSERT INTO indicador (id, codigo, nombre, unidad_medida_id, valor, activo) VALUES (" . $nuevoId . " ,'" . $_nuevo->getCodigo() . "', '" . $_nuevo->getNombre() . "', " . $_nuevo->getUnidadMedidaId() . ", " . $_nuevo->getValor() . ", TRUE)";
+        $query = "INSERT INTO servicio (id, nombre, precio, descripcion, color_tema, detalles, activo) VALUES (" . $nuevoId . " , '" . $_nuevo->getNombre() . "', '" . $_nuevo->getPrecio() . "',  '" . $_nuevo->getDescripcion() . "',   '" . $_nuevo->getColortema() . "',  '" . $_nuevo->getDetalles() . "', TRUE)";
+
         try {
             $rs = mysqli_query($con->getConnection(), $query);
             $con->closeConnection();
@@ -206,7 +216,7 @@ class Indicador
     public function disable(Indicador $_actual)
     {
         $con = new Conexion();
-        $query = "UPDATE indicador SET activo = 0 WHERE id = " . $_actual->getId();
+        $query = "UPDATE servicio SET activo = 0 WHERE id = " . $_actual->getId();
         // echo $query;
         try {
             $rs = mysqli_query($con->getConnection(), $query);

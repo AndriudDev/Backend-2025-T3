@@ -159,7 +159,7 @@ class Indicador
     public function disable(Indicador $_actual)
     {
         $con = new Conexion();
-        $query = "UPDATE indicador SET activo = 0 WHERE id = " . $_actual->getId();
+        $query = "UPDATE menu SET activo = 0 WHERE id = " . $_actual->getId();
         // echo $query;
         try {
             $rs = mysqli_query($con->getConnection(), $query);
