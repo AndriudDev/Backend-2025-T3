@@ -1,0 +1,267 @@
+<?php
+/*
+CREATE TABLE servicio (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    precio INT NOT NULL,
+    descripcion VARCHAR(300),
+    color_tema VARCHAR(20),
+    detalles JSON,              -- aquí van las características del plan
+    activo BOOLEAN NOT NULL DEFAULT TRUE
+);
+
+INSERT INTO servicio 
+(nombre, precio, descripcion, color_tema, detalles, activo)
+VALUES
+(
+    'Página Web Básica',
+    59990,
+    'Ideal para emprendedores o negocios pequeños.',
+    'secondary',
+    '[
+        "Diseño personalizado",
+        "Hasta 4 páginas",
+        "5 Correos Corporativos",
+        "Diseño Responsive",
+        "Alta en Buscadores",
+        "Dominio y hosting (1 año)",
+        "Botón Redes Sociales",
+        "Certificado SSL",
+        "Soporte básico",
+        "Botón Contacto Whatsapp",
+        "Mapa Ubicación Google Maps",
+        "Capacitación"
+    ]',
+    TRUE
+),
+(
+    'Página Web Autoadministrable',
+    109990,
+    'Incluye panel para editar contenidos sin conocimientos técnicos.',
+    'primary',
+    '[
+        "Diseño personalizado",
+        "Hasta 10 páginas",
+        "10 Correos Corporativos",
+        "Diseño Responsive",
+        "Alta en Buscadores",
+        "Dominio y hosting (1 año)",
+        "Botón Redes Sociales",
+        "Certificado SSL",
+        "Soporte básico",
+        "Botón Contacto Whatsapp",
+        "Mapa Ubicación Google Maps",
+        "Posicionamiento Google (SEO)",
+        "Sitio Autoadministrable",
+        "Formulario de Contacto",
+        "Crear Textos e imágenes",
+        "Capacitación"
+    ]',
+    TRUE
+);
+*/
+class Indicador
+{
+    private $id;
+    private $nombre;
+    private $precio;
+    private $descripcion;
+    private $color_tema;
+    private $detalles;
+    private $activo;
+
+    public function __construct() {}
+
+    // accesadores
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+    public function getColortema()
+    {
+        return $this->color_tema;
+    }
+    public function getDetalles()
+    {
+        return $this->detalles;
+    }
+    public function getActivo()
+    {
+        return $this->activo;
+    }
+
+    // mutadores
+    public function setId($_n)
+    {
+        $this->id = $_n;
+    }
+    public function setNombre($_n)
+    {
+        $this->nombre = $_n;
+    }
+    public function setPrecio($_n)
+    {
+        $this->precio = $_n;
+    }
+    public function setDescripcion($_n)
+    {
+        $this->descripcion = $_n;
+    }
+    public function setColortema($_n)
+    {
+        $this->color_tema = $_n;
+    }
+    public function setDetalles($_n)
+    {
+        $this->detalles = $_n;
+    }
+    public function setActivo($_n)
+    {
+        $this->activo = $_n;
+    }
+
+    public function getAll()
+    {
+        $lista = [];
+        $con = new Conexion();
+        //$query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id);";
+        $query = $query = "SELECT * FROM servicio";
+        $rs = mysqli_query($con->getConnection(), $query);
+        if ($rs) {
+            while ($registro = mysqli_fetch_assoc($rs)) {
+                $registro['activo'] = $registro['activo'] == 1 ? true : false;
+                $objeto = [
+                    "id" => $registro['id'],
+                    "nombre" => $registro['nombre'],
+                    "precio" => $registro['precio'],
+                    "descripcion" => $registro['descripcion'],
+                    "color_tema" => $registro['color_tema'],
+                    "detalles" => json_decode($registro['detalles']),
+                    //"font" => $registro['font'],
+                    //"id" => $registro['id'],
+                    "activo" => $registro['activo']
+                ];
+                array_push($lista, $objeto);
+            }
+            mysqli_free_result($rs);
+        }
+        $con->closeConnection();
+        return $lista;
+    }
+
+    public function getById(Indicador $_actual)
+    {
+        $lista = [];
+        $con = new Conexion();
+        //$query = "SELECT indi.id indi_id, indi.codigo indi_codigo, indi.nombre, indi.unidad_medida_id, unme.simbolo, unme.codigo unme_codigo, unme.nombre_singular, unme.nombre_plural, indi.valor, indi.activo FROM indicador indi INNER JOIN unidad_medida unme ON (indi.unidad_medida_id = unme.id) WHERE indi.id=" . $_actual->getId();
+        // echo $query;
+        $query = "SELECT * FROM servicio WHERE id=" . $_actual->getId();
+
+
+        $rs = mysqli_query($con->getConnection(), $query);
+        if ($rs) {
+            while ($registro = mysqli_fetch_assoc($rs)) {
+                $registro['activo'] = $registro['activo'] == 1 ? true : false;
+                $objeto = [
+                    "id" => $registro['id'],
+                    "nombre" => $registro['nombre'],
+                    "precio" => $registro['precio'],
+                    "descripcion" => $registro['descripcion'],
+                    "color_tema" => $registro['color_tema'],
+                    "detalles" => json_decode($registro['detalles']),
+                    //"font" => $registro['font'],
+                    //"id" => $registro['id'],
+                    "activo" => $registro['activo']
+                ];
+                array_push($lista, $objeto);
+            }
+            mysqli_free_result($rs);
+        }
+        $con->closeConnection();
+        return $lista[0] ?? null;
+    }
+
+    public function add(Indicador $_nuevo)
+    {
+        $con = new Conexion();
+        $nuevoId = count($this->getAll()) + 1;
+        $query = "INSERT INTO servicio (id, nombre, precio, descripcion, color_tema, detalles, activo) VALUES (" . $nuevoId . " , '" . $_nuevo->getNombre() . "', '" . $_nuevo->getPrecio() . "',  '" . $_nuevo->getDescripcion() . "',   '" . $_nuevo->getColortema() . "',  '" . $_nuevo->getDetalles() . "', TRUE)";
+
+        try {
+            $rs = mysqli_query($con->getConnection(), $query);
+            $con->closeConnection();
+            if ($rs) {
+                return true;
+            }
+        } catch (\Throwable $th) {
+            echo 'Error al agregar: ' + $th;
+            return false;
+        }
+    }
+
+    public function disable(Indicador $_actual)
+    {
+        $con = new Conexion();
+        $query = "UPDATE servicio SET activo = 0 WHERE id = " . $_actual->getId();
+        // echo $query;
+        try {
+            $rs = mysqli_query($con->getConnection(), $query);
+            $con->closeConnection();
+            if ($rs) {
+                return true;
+            }
+            return false;
+        } catch (\Throwable $th) {
+            echo 'Error al agregar: ' + $th;
+            return false;
+        }
+    }
+
+    public function enable(Indicador $_actual)
+    {
+        $con = new Conexion();
+        $query = "UPDATE servicio SET activo = 1 WHERE id = " . $_actual->getId();
+        // echo $query;
+        try {
+            $rs = mysqli_query($con->getConnection(), $query);
+            $con->closeConnection();
+            if ($rs) {
+                return true;
+            }
+            return false;
+        } catch (\Throwable $th) {
+            echo 'Error al agregar: ' + $th;
+            return false;
+        }
+    }
+
+    public function update(Indicador $_nuevo)
+    {
+        $con = new Conexion();
+        $query = "UPDATE servicio SET nombre='" . $_nuevo->getNombre() . "', precio=" . $_nuevo->getPrecio() . ", descripcion='" . $_nuevo->getDescripcion() ."', color_tema='" . $_nuevo->getColortema() ."', detalles='" . $_nuevo->getDetalles() . "' WHERE id=" . $_nuevo->getId();        
+        //echo $query;
+        try {
+            $rs = mysqli_query($con->getConnection(), $query);
+            $con->closeConnection();
+            if ($rs) {
+                return true;
+            }
+            return false;
+        } catch (\Throwable $th) {
+            echo 'Error al agregar: ' + $th;
+            return false;
+        }
+    }
+}
