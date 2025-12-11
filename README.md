@@ -76,6 +76,7 @@ pass : Bearer ipss.2025.T3
 
 
 
+
 Configuracion sin el archivo creatuwebs.sql
 
 CREATE DATABASE creatuwebs; 
