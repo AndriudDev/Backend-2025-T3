@@ -1,0 +1,392 @@
+{
+	"info": {
+		"_postman_id": "74aece20-92c4-4646-b2b2-a297876207f1",
+		"name": "ProREP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49480348",
+		"_collection_link": "https://andriudev-384053.postman.co/workspace/andriudev's-Workspace~3db6cad2-5cbe-41e8-805a-a5b96c10ca3a/collection/49480348-74aece20-92c4-4646-b2b2-a297876207f1?action=share&source=collection_link&creator=49480348"
+	},
+	"item": [
+		{
+			"name": "GET gestores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/gestores/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"gestores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET empresatipo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/empresatipo/?id=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"empresatipo",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST gestores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Reciclajes Santiago Ltda.\",\r\n    \"empresa_tipo\": {\r\n        \"id\": 1\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/gestores/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"gestores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT gestores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Reciclajes Santiago Ltda.\",\r\n    \"empresa_tipo\": {\r\n        \"id\": 7\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/gestores/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"gestores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH gestores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/gestores/?id=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"gestores",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT empresatipo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Reciclador de Base\",\r\n    \"codigo\": \"R\",\r\n    \"icono\": {\r\n        \"FontAwesome\": \"fa-recycle11\"\r\n    },\r\n    \"color\": {\r\n        \"Tailwind\": \"bg-green123123123-100\",\r\n        \"css\": \"rgb(220 252 231)\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/empresaTipo/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"empresaTipo",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE gestores",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/gestores/?id=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"gestores",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH empresatipo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/empresaTipo/?id=5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"empresaTipo",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE empresatipo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "ipss.2025.T3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost/ipss/api/v1/empresatipo/?id=10",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ipss",
+						"api",
+						"v1",
+						"empresatipo",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

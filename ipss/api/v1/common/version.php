@@ -1,9 +1,15 @@
 <?php
 // Configuracion de los Headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH, PUT");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, PATCH, PUT, OPTIONS");
+header("Access-Control-Allow-Headers: Authorization, Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 
+// Responder a preflight OPTIONS
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 $_host = $_SERVER['HTTP_HOST'];
 $_method = $_SERVER['REQUEST_METHOD'];
@@ -40,6 +46,8 @@ if(isset(explode('?id=', $_parametros)[1])){
 
 // Seguridad de la Authorization
 $_autorizar = null;
+$headers = getallheaders();
+
 try {
     if(isset(getallheaders()['Authorization'])){
         $_autorizar = getallheaders()['Authorization'];

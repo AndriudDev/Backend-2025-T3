@@ -11,14 +11,23 @@ class Conexion
 
     public function __construct()
 
+    //{
+    //    $this->server = $_SERVER['SERVER_NAME'];
+    //    $this->connection = null;
+    //    $this->host = '127.0.0.1'; // localhost
+    //    $this->port = 3306;
+    //    $this->db = 'creatuwebs';
+    //    $this->username = 'creatuwebs';
+    //    $this->password = 'creatuwebs_b4ck3nd';
+    //}
     {
         $this->server = $_SERVER['SERVER_NAME'];
         $this->connection = null;
         $this->host = '127.0.0.1'; // localhost
         $this->port = 3306;
-        $this->db = 'creatuwebs';
-        $this->username = 'creatuwebs';
-        $this->password = 'creatuwebs_b4ck3nd';
+        $this->db = 'prored';
+        $this->username = 'prored';
+        $this->password = 'prored_b4ck3nd';
     }
     
     public function getConnection()
