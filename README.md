@@ -8,6 +8,7 @@ Instrucciones de Despliegue (Clave): Pasos exactos para levantar el proyecto en 
 a. "Copiar la carpeta del proyecto dentro de C:\xampp\htdocs\".
 b. "Iniciar los servicios de Apache y MySQL en XAMPP".
 c. Crear base de datos llamada "creatuwebs" en phpMyAdmin (http://localhost/phpmyadmin).
+CREATE DATABASE creatuwebs;
 d. importar script creatuwebs.sql en la base de dato creatuwebs.
 e. Crear usuario con el siguiente comando: 
 
