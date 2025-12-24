@@ -1,24 +1,12 @@
 <?php
 
-include_once '../version.php';
+include_once '../config/version.php';
 
 
 switch ($_method) {
     case 'GET':
         if ($_autorizar === 'Bearer ipss.2025.T3') {
-            /* $data = [
-                [
-                    'id' => 1,
-                    'idioma' => 'es-CL',
-                    'nombreweb' => 'creatuwebs.com',
-                    'descripcionweb' => 'CreaTuWebs - Diseño y desarrollo de sitios web profesionales',
-                    'logo' => 'https://creatuwebs.com/img/logo/creatuwebs-logo.png',
-                    'color' => 'black',
-                    'font' => 'Arial, sans-serif',
-                    'activo' => true
-                ]
-                
-            ]; */
+
 
             include_once '../config/database.php';
             include_once 'modelo.php';

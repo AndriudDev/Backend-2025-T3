@@ -1,6 +1,6 @@
 <?php
 
-include_once '../version.php';
+include_once '../config/version.php';
 
 switch ($_method) {
     case 'GET':

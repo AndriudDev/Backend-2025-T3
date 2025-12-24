@@ -1,6 +1,7 @@
 <?php
 
-include_once '../version.php';
+include_once '../config/version.php';
+
 
 switch ($_method) {
     case 'GET':
@@ -44,7 +45,7 @@ switch ($_method) {
                 echo json_encode($data);
             }
         } else {
-            http_response_code(403);
+            http_response_code(401);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
         }
         break;
@@ -68,7 +69,7 @@ switch ($_method) {
             $respuesta = $modelo->add($modelo);
 
             if ($respuesta) {
-                http_response_code(201);
+                http_response_code(200);
                 echo json_encode(['mensaje' => 'Creado Exitosamente']);
                 die();
             }
@@ -76,7 +77,7 @@ switch ($_method) {
             echo json_encode(['error' => 'No se logró crear el registro']);
             die();
         } else {
-            http_response_code(403);
+            http_response_code(401);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
         }
         break;
@@ -105,7 +106,7 @@ switch ($_method) {
             echo json_encode(['error' => 'No se logró Deshabilitar el registro']);
             die();
         } else {
-            http_response_code(403);
+            http_response_code(401);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
             die();
         }
@@ -118,7 +119,7 @@ switch ($_method) {
 
             if (!isset($_parametroID)) {
                 http_response_code(400);
-                echo json_encode(['error' => 'Falta el ID del registro a Deshabilitar']);
+                echo json_encode(['error' => 'Falta el ID del registro a Activar']);
 
                 die();
             }
@@ -128,7 +129,7 @@ switch ($_method) {
 
             if ($anterior == null) {
                 http_response_code(404);
-                echo json_encode(['error' => 'El ID del registro a Deshabilitar no existe']);
+                echo json_encode(['error' => 'El ID del registro a Activar no existe']);
                 die();
             }
 
@@ -145,7 +146,7 @@ switch ($_method) {
             echo json_encode(['error' => 'No se logró encender el registro']);
             die();
         } else {
-            http_response_code(403);
+            http_response_code(401);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
             die();
         }
@@ -214,14 +215,14 @@ switch ($_method) {
                     die();
                 }
                 http_response_code(409);
-                echo json_encode(['error' => 'No se Actualizó como querías.']);
+                echo json_encode(['error' => 'No se Actualizó el hero.']);
                 die();
             }
             http_response_code(409);
             echo json_encode(['error' => 'No se hicieron cambios']);
             die();
         } else {
-            http_response_code(403);
+            http_response_code(401);
             echo json_encode(['error' => 'El cliente no posee los permisos necesarios para cierto contenido, por lo que el servidor está rechazando otorgar una respuesta apropiada.']);
             die();
         }
