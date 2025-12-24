@@ -34,6 +34,8 @@ pass : Bearer ipss.2025.T3
 
 
 
+# Swagger
+Link de ingreso: http://localhost/ipss/api/v1/swagger/
 
 
 

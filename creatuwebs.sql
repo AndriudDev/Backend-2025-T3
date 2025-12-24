@@ -93,8 +93,8 @@ INSERT INTO `menu` (`id`, `nombre`, `link`, `orden`, `activo`) VALUES
 (1, 'Inicio', '#home', 0, 1),
 (2, 'Portafolio', '#portafolio', 1, 1),
 (3, 'Servicios', '#servicios', 2, 1),
-(4, 'FAQ', 'https://creatuwebs.com/faq', 3, 1),
-(5, 'Contactanos', 'https://creatuwebs.com/contactanos', 4, 1);
+(4, 'FAQ', '#faq', 3, 1),
+(5, 'Contáctanos', '#contactanos', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -105,7 +105,7 @@ INSERT INTO `menu` (`id`, `nombre`, `link`, `orden`, `activo`) VALUES
 CREATE TABLE `servicio` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `precio` int(11) NOT NULL,
+  `precio` DECIMAL(10,3) NOT NULL,
   `descripcion` varchar(300) DEFAULT NULL,
   `color_tema` varchar(20) DEFAULT NULL,
   `detalles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`detalles`)),
@@ -117,8 +117,8 @@ CREATE TABLE `servicio` (
 --
 
 INSERT INTO `servicio` (`id`, `nombre`, `precio`, `descripcion`, `color_tema`, `detalles`, `activo`) VALUES
-(1, 'Página Web Básica', 59990, 'Ideal para emprendedores o negocios pequeños.', 'secondary', '[\r\n        \"✅Diseño personalizado\",\r\n        \"✅Hasta 4 páginas\",\r\n        \"✅5 Correos Corporativos\",\r\n        \"✅Diseño Responsive\",\r\n        \"✅Alta en Buscadores\",\r\n        \"✅Dominio y hosting (1 año)\",\r\n        \"✅Botón Redes Sociales\",\r\n        \"✅Certificado SSL\",\r\n        \"✅Soporte básico\",\r\n        \"✅Botón Contacto Whatsapp\",\r\n        \"✅Mapa Ubicación Google Maps\",\r\n        \"✅Capacitación\"\r\n    ]', 1),
-(2, 'Página Web Autoadministrable', 109990, 'Incluye panel para editar contenidos sin conocimientos técnicos.', 'primary', '[\r\n        \"✅Diseño personalizado\",\r\n        \"✅Hasta 10 páginas\",\r\n        \"✅10 Correos Corporativos\",\r\n        \"✅Diseño Responsive\",\r\n        \"✅Alta en Buscadores\",\r\n        \"✅Dominio y hosting (1 año)\",\r\n        \"✅Botón Redes Sociales\",\r\n        \"✅Certificado SSL\",\r\n        \"✅Soporte básico\",\r\n        \"✅Botón Contacto Whatsapp\",\r\n        \"✅Mapa Ubicación Google Maps\",\r\n        \"✅Posicionamiento Google (SEO)\",\r\n        \"✅Sitio Autoadministrable\",\r\n        \"✅Formulario de Contacto\",\r\n        \"✅Crear Textos e imágenes\",\r\n        \"✅Capacitación\"\r\n    ]', 1);
+(1, 'Página Web Básica', 59.990, 'Ideal para emprendedores o negocios pequeños.', 'secondary', '[\r\n        \"✅Diseño personalizado\",\r\n        \"✅Hasta 4 páginas\",\r\n        \"✅5 Correos Corporativos\",\r\n        \"✅Diseño Responsive\",\r\n        \"✅Alta en Buscadores\",\r\n        \"✅Dominio y hosting (1 año)\",\r\n        \"✅Botón Redes Sociales\",\r\n        \"✅Certificado SSL\",\r\n        \"✅Soporte básico\",\r\n        \"✅Botón Contacto Whatsapp\",\r\n        \"✅Mapa Ubicación Google Maps\",\r\n        \"✅Capacitación\"\r\n    ]', 1),
+(2, 'Página Web Autoadministrable', 109.990, 'Incluye panel para editar contenidos sin conocimientos técnicos.', 'primary', '[\r\n        \"✅Diseño personalizado\",\r\n        \"✅Hasta 10 páginas\",\r\n        \"✅10 Correos Corporativos\",\r\n        \"✅Diseño Responsive\",\r\n        \"✅Alta en Buscadores\",\r\n        \"✅Dominio y hosting (1 año)\",\r\n        \"✅Botón Redes Sociales\",\r\n        \"✅Certificado SSL\",\r\n        \"✅Soporte básico\",\r\n        \"✅Botón Contacto Whatsapp\",\r\n        \"✅Mapa Ubicación Google Maps\",\r\n        \"✅Posicionamiento Google (SEO)\",\r\n        \"✅Sitio Autoadministrable\",\r\n        \"✅Formulario de Contacto\",\r\n        \"✅Crear Textos e imágenes\",\r\n        \"✅Capacitación\"\r\n    ]', 1);
 
 --
 -- Índices para tablas volcadas
