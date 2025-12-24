@@ -164,7 +164,7 @@ VALUES
 CREATE TABLE servicio (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
-    precio INT NOT NULL,
+    precio DECIMAL(10,3) NOT NULL,
     descripcion VARCHAR(300),
     color_tema VARCHAR(20),
     detalles JSON,              -- aquí van las características del plan
